@@ -14,6 +14,7 @@ ROUTES = {"R1": {"name": "Main Gate - Library", "trips": []},
 MIN_CAPACITY = 10
 DRIVERS = ["Prakash", "Leela", "Imran", "Tom"]
 
+
 def add_trip_log(route_id, passenger_count, logs=None):
     """Record one trip's passenger count and append a log line.
 
@@ -32,9 +33,11 @@ def add_trip_log(route_id, passenger_count, logs=None):
     logs.append(f"{datetime.now()}: {route_id} carried {passenger_count}")
     return logs
 
+
 def remove_route(route_id):
     """Remove a route if it exists. Returns True if it was removed."""
     return ROUTES.pop(route_id, None) is not None
+
 
 def average_load(route_id):
     """Return the average passengers per trip, or None if no trips yet.
@@ -46,6 +49,7 @@ def average_load(route_id):
         return None
     return sum(trips) / len(trips)
 
+
 def underused_routes():
     """Return the routes whose average load is below MIN_CAPACITY."""
     flagged = []
@@ -55,9 +59,11 @@ def underused_routes():
             flagged.append(route_id)
     return flagged
 
+
 def assign_driver():
     """Pick a driver for a route using a secure random choice."""
     return secrets.choice(DRIVERS)
+
 
 def sync_fleet_data(path="fleet.json"):
     """Write the fleet data to a JSON file and reload it from there."""
@@ -67,6 +73,7 @@ def sync_fleet_data(path="fleet.json"):
         data = json.load(fleet_file)
     ROUTES.clear()
     ROUTES.update(data)
+
 
 def main():
     """Run a short demo of the shuttle tracker."""
@@ -90,6 +97,7 @@ def main():
         print("R3 average:", average_load("R3"))
     else:
         print("R3 has been removed, so it has no average.")
+
 
 if __name__ == "__main__":
     main()
